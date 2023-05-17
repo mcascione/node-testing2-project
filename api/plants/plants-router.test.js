@@ -69,3 +69,14 @@ describe("[PUT] /plants/:id", () => {
     expect(res.body).toMatchObject(updatedPlant);
   });
 });
+
+describe("[DELETE] /plants/:id", () => {
+  test("responds with a 200 ok", async () => {
+    const res = await request(server).delete("/plants/3");
+    expect(res.status).toBe(200);
+  });
+  test("responds with a message confirming deletion", async () => {
+    const res = await request(server).delete("/plants/2");
+    expect(res.body.message).toContain("2");
+  });
+});
