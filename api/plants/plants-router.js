@@ -3,17 +3,12 @@ const Plant = require("./plants-model");
 const { checkID } = require("./plants-middleware");
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   Plant.getAll()
     .then((plants) => {
       res.status(200).json(plants);
     })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.message,
-        customMessage: "unable to fetch plants",
-      });
-    });
+    .catch(next)
 });
 
 router.get("/:id", checkID, (req, res, next) => {
@@ -23,5 +18,11 @@ router.get("/:id", checkID, (req, res, next) => {
     })
     .catch(next);
 });
+
+router.post("/", (req, res, next) => {});
+
+router.put("/:id", (req, res, next) => {});
+
+router.delete("/:id", (req, res, next) => {});
 
 module.exports = router;
