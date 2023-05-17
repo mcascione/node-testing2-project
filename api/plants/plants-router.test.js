@@ -37,3 +37,19 @@ describe("[GET] /plants/:id", () => {
     });
   });
 });
+
+describe("[POST] /plants", () => {
+  const grapefruitTree = {
+    name: "grapefruit tree",
+    family: "Rutaceae",
+    purchased: 0,
+  };
+  test("responds with a 201 created", async () => {
+    const res = await request(server).post("/plants").send(grapefruitTree);
+    expect(res.status).toBe(201);
+  });
+  test("responds with the plant that was created", async () => {
+    const res = await request(server).post("/plants").send(grapefruitTree);
+    expect(res.body).toMatchObject(grapefruitTree);
+  });
+});

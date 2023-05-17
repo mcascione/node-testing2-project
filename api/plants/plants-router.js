@@ -8,7 +8,7 @@ router.get("/", (req, res, next) => {
     .then((plants) => {
       res.status(200).json(plants);
     })
-    .catch(next)
+    .catch(next);
 });
 
 router.get("/:id", checkID, (req, res, next) => {
@@ -19,7 +19,13 @@ router.get("/:id", checkID, (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", (req, res, next) => {});
+router.post("/", (req, res, next) => {
+  Plant.insert(req.body)
+    .then((newPlant) => {
+      res.status(201).json(newPlant);
+    })
+    .catch(next);
+});
 
 router.put("/:id", (req, res, next) => {});
 
