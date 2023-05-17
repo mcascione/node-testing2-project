@@ -1,6 +1,6 @@
 const express = require("express");
 const Plant = require("./plants-model");
-const { checkID } = require("./plants-middleware");
+const { checkID, validateBody } = require("./plants-middleware");
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
@@ -19,7 +19,7 @@ router.get("/:id", checkID, (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", validateBody, (req, res, next) => {
   Plant.insert(req.body)
     .then((newPlant) => {
       res.status(201).json(newPlant);
@@ -27,7 +27,7 @@ router.post("/", (req, res, next) => {
     .catch(next);
 });
 
-router.put("/:id", (req, res, next) => {
+router.put("/:id", validateBody, (req, res, next) => {
   Plant.update(req.params.id, req.body)
     .then((updatedPlant) => {
       res.status(200).json(updatedPlant);

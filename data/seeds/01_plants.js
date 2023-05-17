@@ -3,8 +3,8 @@ exports.seed = function (knex) {
     .truncate()
     .then(function () {
       return knex("plants").insert([
-        { name: "basil", family: "Lamiaceae", purchased: 1 },
-        { name: "Meyer lemon tree", family: "Rutaceae", purchased: 0 },
+        { name: "basil", family: "Lamiaceae", purchased: true },
+        { name: "Meyer lemon tree", family: "Rutaceae", purchased: false },
         { name: "avocado tree", family: "Lauraceae", purchased: 0 },
       ]);
     });

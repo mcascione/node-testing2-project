@@ -42,7 +42,7 @@ describe("[POST] /plants", () => {
   const grapefruitTree = {
     name: "grapefruit tree",
     family: "Rutaceae",
-    purchased: 0,
+    purchased: false,
   };
   test("responds with a 201 created", async () => {
     const res = await request(server).post("/plants").send(grapefruitTree);
@@ -50,7 +50,11 @@ describe("[POST] /plants", () => {
   });
   test("responds with the plant that was created", async () => {
     const res = await request(server).post("/plants").send(grapefruitTree);
-    expect(res.body).toMatchObject(grapefruitTree);
+    expect(res.body).toMatchObject({
+      name: "grapefruit tree",
+      family: "Rutaceae",
+      purchased: 0,
+    });
   });
 });
 
