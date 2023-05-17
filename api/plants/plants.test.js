@@ -69,7 +69,24 @@ describe("insert", () => {
   });
   test("adds the plant to the plants table", async () => {
     await Plant.insert(teaRose);
-    const table = await Plant.getAll();
+    const table = await db("plants");
     expect(table).toHaveLength(4);
+  });
+});
+
+describe("update", () => {
+  const changes = {
+    name: "avocado tree",
+    family: "Lauraceae",
+    purchased: 1,
+  };
+  test("resolves the update plant", async () => {
+    const result = await Plant.update(3, changes);
+    expect(result).toMatchObject(changes);
+  });
+  test("replaces the correct plant with the updated plant in the plants table", async () => {
+    await Plant.update(3, changes);
+    const updatedPlant = await db("plants").where("id", 3).first();
+    expect(updatedPlant).toMatchObject(changes);
   });
 });

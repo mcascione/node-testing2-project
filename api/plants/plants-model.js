@@ -15,7 +15,25 @@ async function insert(plant) {
       return db("plants").where("id", id).first();
     });
 }
-function update() {}
+
+async function update(id, changes) {
+const {name, family, purchased} = changes
+  return await db("plants")
+    .update({name, family, purchased})
+    .where("id", id)
+    .then(() => {
+        return db("plants").where("id", id).first()
+    })
+}
+
+/*
+update 
+plants 
+set purchased = 0 
+where name = 'avocado tree' 
+
+ */
+
 function remove() {}
 
 module.exports = {
