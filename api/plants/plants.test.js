@@ -17,7 +17,6 @@ test("environment is testing", () => {
 describe("getAll", () => {
   test("resolves all the plants in a table", async () => {
     const result = await Plant.getAll();
-    console.log(result);
     expect(result).toHaveLength(3);
     expect(result[0]).toMatchObject({
       name: "basil",
@@ -88,5 +87,17 @@ describe("update", () => {
     await Plant.update(3, changes);
     const updatedPlant = await db("plants").where("id", 3).first();
     expect(updatedPlant).toMatchObject(changes);
+  });
+});
+
+describe("remove", () => {
+  test("resolves to number of records deleted 1", async () => {
+    const result = await Plant.remove(3);
+    expect(result).toBe(1);
+  });
+  test("removes the plant from the plants table", async () => {
+    await Plant.remove(3);
+    const table = await db("plants");
+    expect(table).toHaveLength(2);
   });
 });

@@ -26,15 +26,10 @@ const {name, family, purchased} = changes
     })
 }
 
-/*
-update 
-plants 
-set purchased = 0 
-where name = 'avocado tree' 
 
- */
-
-function remove() {}
+function remove(id) {
+  return db("plants").delete().where("id", id)
+}
 
 module.exports = {
   getAll,
