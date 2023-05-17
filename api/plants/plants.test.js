@@ -60,3 +60,16 @@ describe("getByID", () => {
     });
   });
 });
+
+describe("insert", () => {
+  const teaRose = { name: "tea rose", family: "Rosaceae", purchased: 1 };
+  test("resolves the newly created plant", async () => {
+    const result = await Plant.insert(teaRose);
+    expect(result).toMatchObject(teaRose);
+  });
+  test("adds the plant to the plants table", async () => {
+    await Plant.insert(teaRose);
+    const table = await Plant.getAll();
+    expect(table).toHaveLength(4);
+  });
+});
