@@ -12,4 +12,12 @@ server.get("/", (req, res) => {
 
 server.use("/plants", Plants);
 
+//eslint-disable-next-line
+server.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status || 500).json({
+    message: err.message
+  });
+});
+
 module.exports = server;

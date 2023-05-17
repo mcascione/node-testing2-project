@@ -1,5 +1,6 @@
 const express = require("express");
 const Plants = require("./plants-model");
+const { checkID } = require("./plants-middleware");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -13,6 +14,14 @@ router.get("/", (req, res) => {
         customMessage: "unable to fetch plants",
       });
     });
+});
+
+router.get("/:id", checkID, (req, res, next) => {
+  Plants.getByID(req.params.id)
+    .then((plant) => {
+      res.status(200).json(plant);
+    })
+    .catch(next);
 });
 
 module.exports = router;
