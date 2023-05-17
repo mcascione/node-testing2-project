@@ -1,5 +1,6 @@
-const db = require("../../data/dbConfig");
-// const Plant = require("./plants-model");
+const db = require("../data/dbConfig");
+// const request = require("supertest");
+// const server = require("./server");
 
 beforeAll(async () => {
   await db.migrate.rollback();
