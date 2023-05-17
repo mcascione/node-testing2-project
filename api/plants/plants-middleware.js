@@ -1,7 +1,7 @@
-const Plants = require("./plants-model");
+const Plant = require("./plants-model");
 
 async function checkID(req, res, next) {
-  const idExists = await Plants.getByID(req.params.id);
+  const idExists = await Plant.getByID(req.params.id);
   if (idExists) {
     next();
   } else {

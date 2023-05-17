@@ -1,10 +1,10 @@
 const express = require("express");
-const Plants = require("./plants-model");
+const Plant = require("./plants-model");
 const { checkID } = require("./plants-middleware");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  Plants.getAll()
+  Plant.getAll()
     .then((plants) => {
       res.status(200).json(plants);
     })
@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", checkID, (req, res, next) => {
-  Plants.getByID(req.params.id)
+  Plant.getByID(req.params.id)
     .then((plant) => {
       res.status(200).json(plant);
     })
