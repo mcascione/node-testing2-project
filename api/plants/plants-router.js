@@ -27,7 +27,13 @@ router.post("/", (req, res, next) => {
     .catch(next);
 });
 
-router.put("/:id", (req, res, next) => {});
+router.put("/:id", (req, res, next) => {
+  Plant.update(req.params.id, req.body)
+    .then((updatedPlant) => {
+        res.status(200).json(updatedPlant)
+    })
+    .catch(next)
+});
 
 router.delete("/:id", (req, res, next) => {});
 

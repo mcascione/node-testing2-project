@@ -53,3 +53,19 @@ describe("[POST] /plants", () => {
     expect(res.body).toMatchObject(grapefruitTree);
   });
 });
+
+describe("[PUT] /plants/:id", () => {
+  const updatedPlant = {
+    name: "Hass avocado tree",
+    family: "Lauraceae",
+    purchased: 0,
+  };
+  test("responds with a 200 ok status", async () => {
+    const res = await request(server).put("/plants/2").send(updatedPlant);
+    expect(res.status).toBe(200);
+  });
+  test("responds with the updated plant", async () => {
+    const res = await request(server).put("/plants/2").send(updatedPlant);
+    expect(res.body).toMatchObject(updatedPlant);
+  });
+});
